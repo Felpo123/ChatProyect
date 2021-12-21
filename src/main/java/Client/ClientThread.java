@@ -20,9 +20,8 @@ public class ClientThread extends Thread{
     public void run(){
         try{
             stop=false;
-            in=new DataInputStream(s.getInputStream());
             while(!stop) {
-                messageTCP = in.readUTF();
+                messageTCP = leerSegmento();
                 System.out.println(messageTCP);
                 if (messageTCP.equalsIgnoreCase("Adios")){
                     stop = true;
@@ -33,6 +32,16 @@ public class ClientThread extends Thread{
             System.out.println("Error en Hilo TCP Cliente");
             io.printStackTrace();
             stop=true;
+        }
+    }
+
+    public String leerSegmento(){
+        try{
+           in=new DataInputStream(s.getInputStream());
+           return in.readUTF();
+        }catch (IOException e){
+            System.out.println("Error en Hilo TCP Cliente");
+            return null;
         }
     }
 

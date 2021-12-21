@@ -71,6 +71,7 @@ public class Client {
             System.out.println("Error en socket UDP");
             return false;
         }catch (IllegalArgumentException e2){
+            System.out.println("Error en socket UDP");
             return false;
         }
     }

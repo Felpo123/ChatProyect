@@ -15,10 +15,11 @@ class UsersTest {
 
     static Users users;
     static ServerSocket ss;
-    static Socket[] sockets = new Socket[5];
+    static Socket[] sockets;
 
     @BeforeAll
     static void init(){
+        sockets = new Socket[5];
         users = new Users();
         try{
             ss = new ServerSocket(7777);

@@ -18,21 +18,27 @@ public class ClientThreadUDP  extends Thread{
         this.name=name;
     }
 
-
     public void run() {
 
-        try {
             while (!stop) {
-                datagramSocket.receive(datagramPacket);
-                messageUDP = new String(datagramPacket.getData());
+                messageUDP = leerPaquete();
                 System.out.println(messageUDP);
                 if (messageUDP.equalsIgnoreCase("- "+name+" disconected(UDP)"))
                     stop=true;
             }
             datagramSocket.close();
 
+    }
+    public String leerPaquete(){
+        try {
+            datagramSocket.receive(datagramPacket);
+            return new String(datagramPacket.getData());
         }catch (IOException e){
             System.out.println("Error en Hilo UDP Cliente");
+            return null;
         }
     }
 }
+
+
+
