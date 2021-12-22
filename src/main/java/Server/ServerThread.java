@@ -51,7 +51,7 @@ public class ServerThread extends Thread {
                 if (message.equalsIgnoreCase("exit")) {
                     exit = true;
                     sendMessageUDP("- " + name + " disconected(UDP)");
-                    sendMessage("Adios");
+                    ou.writeUTF("Adios");
                     escribirHistorial("- " + name + " disconected",archivo);
                     removeClient();
                 } else if (message.equalsIgnoreCase("/h")) {
