@@ -19,7 +19,6 @@ public class ClientThread extends Thread{
 
     public void run(){
         try{
-            stop=false;
             while(!stop) {
                 messageTCP = leerSegmento();
                 System.out.println(messageTCP);
@@ -28,10 +27,9 @@ public class ClientThread extends Thread{
                 }
             }
             s.close();
+            in.close();
         }catch(IOException io){
             System.out.println("Error en Hilo TCP Cliente");
-            io.printStackTrace();
-            stop=true;
         }
     }
 

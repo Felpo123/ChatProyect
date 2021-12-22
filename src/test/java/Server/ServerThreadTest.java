@@ -44,7 +44,6 @@ class ServerThreadTest {
         assertEquals(true,st.UDP(s,"msg"));
     }
 
-
     @Test
     void escribirHistorial() {
         assertEquals(true,st.escribirHistorial("msg",new File("src/test/java/historialtest/hola")));

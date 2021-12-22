@@ -12,7 +12,6 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UsersTest {
-
     static Users users;
     static ServerSocket ss;
     static Socket[] sockets;
@@ -30,7 +29,6 @@ class UsersTest {
         }catch (Exception e ){e.printStackTrace();}
 
     }
-
     @Test
     void getUsers() {
         HashMap<Integer, Socket> hashMap = new HashMap<>();
@@ -50,6 +48,5 @@ class UsersTest {
     void removeUser(int i) {
         Socket[] resultados = {sockets[4],null,null,null,null};
         assertEquals(resultados[i],users.removeUser(i));
-
     }
 }

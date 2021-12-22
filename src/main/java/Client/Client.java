@@ -21,7 +21,7 @@ public class Client {
     private static byte[] buffer;
 
     public static void main(String[] args){
-        inicioConexionTCP("localhost",6660);
+        inicioConexionTCP("localhost",6662);
         UDP(6001);
         try{
             System.out.print("Ingresa tu Nombre: ");
@@ -37,15 +37,14 @@ public class Client {
         while(!end){
             try{
                 message=in.readLine();
-                ou.writeUTF(message);
                 if(message.equalsIgnoreCase("exit")){
                     end=true;
                 }
+                ou.writeUTF(message);
             }catch(IOException io2){
                 System.out.println("Error in loop");
             }
         }
-        return;
     }
 
     public static boolean inicioConexionTCP(String host, int port){
@@ -64,7 +63,7 @@ public class Client {
     public static boolean UDP(int port){
         try {
             datagramSocket = new DatagramSocket(port);
-            buffer = new byte[50];
+            buffer = new byte[25];
             datagramPacket = new DatagramPacket(buffer, buffer.length);
             return true;
         }catch (IOException e){

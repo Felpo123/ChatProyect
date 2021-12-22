@@ -18,7 +18,7 @@ public class Server {
             cont=0;
             list = new Users();
             salir=false;
-            ss=new ServerSocket(6660);
+            ss=new ServerSocket(6662);
             System.out.println("Server running");
             fileHistorial = new File("src/main/java/Historial");
 

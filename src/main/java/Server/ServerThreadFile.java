@@ -13,10 +13,10 @@ public class ServerThreadFile  extends Thread {
     private static final String ANSI_RED = "\u001B[31m";
     private static final String ANSI_RESET = "\u001B[0m";
 
-    public ServerThreadFile(Socket s,DataInputStream in, DataOutputStream ou){
+    public ServerThreadFile(Socket s) throws IOException {
         this.s = s;
-        this.in = in;
-        this.ou = ou;
+        this.in = new DataInputStream(s.getInputStream());
+        this.ou = new DataOutputStream(s.getOutputStream());
         this.historial = new File("src/main/java/Historial");
     }
 
@@ -26,7 +26,7 @@ public class ServerThreadFile  extends Thread {
             enviarMensaje(ANSI_RED +leerHistorial(historial)+ ANSI_RESET);
             String msg = in.readUTF();
             String path = historial.getPath()+"/"+msg;
-            leerArchivo(path);
+            enviarContenidoArchivo(path);
         }catch (IOException e){
             System.out.println("Error en hilo historial");
             e.printStackTrace();
@@ -38,11 +38,10 @@ public class ServerThreadFile  extends Thread {
         String archivos = "";
         for (int i=0; i<contenido.length; i++)
             archivos = archivos +"\n"+contenido[i];
-
         return archivos;
     }
 
-     public static boolean leerArchivo(String path) {
+     public static boolean enviarContenidoArchivo(String path) {
         try {
             fr = new FileReader(path);
             br = new BufferedReader(fr);

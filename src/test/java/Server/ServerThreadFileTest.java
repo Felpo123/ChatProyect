@@ -15,13 +15,9 @@ import java.net.Socket;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ServerThreadFileTest {
-
     static ServerSocket ss;
     static Socket s, s2;
     static ServerThreadFile stf;
-    static DataInputStream in;
-    static DataOutputStream ou;
-
 
     @BeforeAll
     static void init(){
@@ -29,9 +25,7 @@ class ServerThreadFileTest {
              ss = new ServerSocket(9999);
              s2 = new Socket("localhost",9999);
              s=ss.accept();
-             in = new DataInputStream(s.getInputStream());
-             ou = new DataOutputStream(s.getOutputStream());
-             stf = new ServerThreadFile(s,in,ou);
+             stf = new ServerThreadFile(s);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -40,11 +34,11 @@ class ServerThreadFileTest {
 
     @ParameterizedTest
     @ValueSource( ints = {0,1,2,3,4})
-    void leerArchivo(int i){
+    void enviarContenidoArchivo(int i){
         String[] paths = {"src/main/java/Historial/2021.12.10","src/main/java/Historial/Noexiste","src/main/java/Historial/2021.12.11",
                           "src/main/java/Historial/2021.12.1", "src/main/java/Historial/2021.12.3"};
         boolean[] resultados = {true,false,true,false,false};
-        assertEquals(resultados[i],stf.leerArchivo(paths[i]));
+        assertEquals(resultados[i],stf.enviarContenidoArchivo(paths[i]));
     }
 
     @ParameterizedTest
